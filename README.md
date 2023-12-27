@@ -4,7 +4,7 @@ The good old way of writing clean code is:
 - you write a protocol
 - you write implementation
 - you implement a mock for the test
-- when you change something you you need to change everything on 3 places. Hire more developers and you are done.
+- when you change something you need to change everything at 3 places. Hire more developers and you are done.
 
 Should we really do this all?
 
