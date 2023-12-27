@@ -14,7 +14,7 @@ What if we focus on the REAL implementation and let the macro do the rest.
 
 Most projects use one protocol conformance per class. This is swift. We can write as many extensions as we want, and we will.
 
-That is why we do a POP mock:
+That is why we do a POP mock with nested protocols.
 
 ### Example Code - Original
 
