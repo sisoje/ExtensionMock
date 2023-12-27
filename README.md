@@ -4,7 +4,7 @@ The good old way of writing clean code is:
 - you write a protocol
 - you write implementation
 - you implement a mock for the test
-- when you change a function signature in any of the 3 places you need to update it on other 2 places. Hire more developers and you are done.
+- when you change a function signature in any of the 3 places you need to update it on other 2 places.
 
 Should we really do this all boilerplate by hand and look at it sitting there in the code?
 
@@ -14,7 +14,7 @@ Writing super clean code with a macro:
 - you implement a piece of functionality as an extension of your real class
 - macro will generate a nested protocol
 - macro will generate a nested mock class
-- when you change function signature in the only one real implementation you have, then protocol and mock updates automatically. Layoff more developers and you are done.
+- when you change function signature in the only one real implementation you have, then protocol and mock updates automatically.
 
 # POP & Mock
 
