@@ -1,4 +1,4 @@
-# PopMock macro
+# PopMock macro - needs swift 5.10 toolchain
 
 The good old way of writing clean code is:
 - you write a protocol
