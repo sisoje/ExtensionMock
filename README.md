@@ -6,7 +6,7 @@ The good old way of writing clean code is:
 - you implement a mock for the test
 - when you change something you need to change everything at 3 places. Hire more developers and you are done.
 
-Should we really do this all?
+Should we really do this all boilerplate by hand and look at it sitting there in the code?
 
 What if we focus on the REAL implementation and let the macro do the rest.
 
