@@ -21,7 +21,7 @@ struct FunctionMockableDeclarationFactory {
                 }.joined(separator: ", ") + ")"
             }
             
-            let structName1 = if isAsyncThrowsFuction(function) {
+            let structName1 = if isThrowingFuction(function) && isAsyncFuction(function) {
                 "MockAsyncThrowing"
             } else if isThrowingFuction(function) {
                 "MockThrowing"
@@ -50,7 +50,7 @@ struct FunctionMockableDeclarationFactory {
                     $0.secondName?.text != nil ? $0.secondName!.text : $0.firstName.text
                 }
             
-            let tryStringLiteral = if isAsyncThrowsFuction(function) {
+            let tryStringLiteral = if isThrowingFuction(function) && isAsyncFuction(function) {
                 "try await "
             } else if isThrowingFuction(function) {
                 "try "
@@ -71,6 +71,8 @@ struct FunctionMockableDeclarationFactory {
             ) {
                 if paramsValues.isEmpty {
                     CodeBlockItemSyntax(stringLiteral: tryStringLiteral + function.name.text + "Mock." + "record()")
+                } else if paramsValues.count == 1 {
+                    CodeBlockItemSyntax(stringLiteral: tryStringLiteral + function.name.text + "Mock." + "record(\(paramsValues.joined(separator: ", ")))")
                 } else {
                     CodeBlockItemSyntax(stringLiteral: tryStringLiteral + function.name.text + "Mock." + "record((\(paramsValues.joined(separator: ", "))))")
                 }
@@ -104,8 +106,7 @@ struct FunctionMockableDeclarationFactory {
                 genericParameterClause: function.genericParameterClause,
                 signature: function.signature,
                 genericWhereClause: function.genericWhereClause
-            )
-            {
+            ) {
                 CodeBlockItemSyntax(stringLiteral: " fatalError() ")
             }
         }
@@ -117,9 +118,5 @@ struct FunctionMockableDeclarationFactory {
     
     private func isAsyncFuction(_ function: FunctionDeclSyntax) -> Bool {
         function.signature.effectSpecifiers?.asyncSpecifier?.text == "async"
-    }
-    
-    private func isAsyncThrowsFuction(_ function: FunctionDeclSyntax) -> Bool {
-        isThrowingFuction(function) && isAsyncFuction(function)
     }
 }

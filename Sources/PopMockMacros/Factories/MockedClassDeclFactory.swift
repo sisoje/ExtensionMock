@@ -15,8 +15,8 @@ struct MockedClassDeclFactory {
                     .compactMap { $0.decl.as(FunctionDeclSyntax.self) }
                 
                 let functionsFactory = FunctionMockableDeclarationFactory()
-                functionsFactory.callTrackerDeclarations(functions)
                 functionsFactory.mockImplementations(for: functions)
+                functionsFactory.callTrackerDeclarations(functions)
             }
         )
     }

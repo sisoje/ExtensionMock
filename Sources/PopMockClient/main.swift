@@ -14,6 +14,7 @@ class Networking {}
 
 @PopMock
 extension Networking: Networking.UserService {
+    func deleteUser(_ id: String) async throws  {}
     func getUser(_ id: String) async throws -> User  {
         User(id: "1", name: "real user")
     }
