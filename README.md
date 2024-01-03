@@ -25,16 +25,6 @@ That is why we do a POP mock with nested protocols.
 ### Example Code - Original
 
 ```
-struct User {
-    let id: String
-    var name: String
-}
-
-struct Item {
-    let id: String
-    let title: String
-}
-
 class Networking {}
 
 @PopMock
