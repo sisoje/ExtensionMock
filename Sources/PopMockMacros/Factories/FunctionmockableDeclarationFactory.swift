@@ -35,7 +35,6 @@ struct FunctionMockableDeclarationFactory {
             let templateParams = params.isEmpty ? returnType : "\(pa), \(returnType)"
 
             VariableDeclSyntax(
-                modifiers: DeclModifierListSyntax([.init(name: .identifier(""))]),
                 .var,
                 name: PatternSyntax(stringLiteral: function.name.text + "Mock = \(structName)<\(templateParams)>()")
             )
@@ -81,7 +80,7 @@ struct FunctionMockableDeclarationFactory {
     }
     
     @MemberBlockItemListBuilder
-    func protoDeclarations(for functions: [FunctionDeclSyntax]) -> MemberBlockItemListSyntax {
+    func protoDeclarations(functions: [FunctionDeclSyntax]) -> MemberBlockItemListSyntax {
         for function in functions {
             FunctionDeclSyntax(
                 attributes: function.attributes,
@@ -96,18 +95,21 @@ struct FunctionMockableDeclarationFactory {
     }
     
     @MemberBlockItemListBuilder
-    func protoDeclarationsExt(for functions: [FunctionDeclSyntax]) -> MemberBlockItemListSyntax {
-        for function in functions {
-            FunctionDeclSyntax(
-                attributes: function.attributes,
-                modifiers: function.modifiers,
-                funcKeyword: function.funcKeyword,
-                name: function.name,
-                genericParameterClause: function.genericParameterClause,
-                signature: function.signature,
-                genericWhereClause: function.genericWhereClause
-            ) {
-                CodeBlockItemSyntax(stringLiteral: " fatalError() ")
+    func protoDeclarations(variables: [VariableDeclSyntax]) -> MemberBlockItemListSyntax {
+        for variable in variables {
+            var mvar = variable
+            if let binding = variable.bindings.first, let type = binding.typeAnnotation?.type.trimmedDescription {
+                let acesors = binding.accessorBlock?.accessors
+                let pat: PatternSyntax = "\(raw: binding.pattern.trimmedDescription): \(raw: type)"
+                VariableDeclSyntax(
+                    bindingSpecifier: .keyword(.var),
+                    bindings: .init(
+                        arrayLiteral: PatternBindingSyntax(
+                            pattern: pat,
+                            accessorBlock: .init(accessors:  .getter("get"))
+                        )
+                    )
+                )
             }
         }
     }

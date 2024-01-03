@@ -10,10 +10,8 @@ public struct PopMockMacro: MemberMacro {
             let fullName = extensionDecl.inheritanceClause?.inheritedTypes.trimmedDescription,
             let protocolName = fullName.components(separatedBy: ".").last else { return [] }
         return [
-            // DeclSyntax(MockedVariableDeclFactory().make(protocolName: .identifier(protocolName), typeName: mockClassName, from: classDecl)),
-            // DeclSyntax(MockedClassDeclFactory().makeProtoExt(protocname: .identifier(protocolName), from: classDecl)),
-            DeclSyntax(MockedClassDeclFactory().makeProto(protocname: .identifier(protocolName), from: extensionDecl)),
-            DeclSyntax(MockedClassDeclFactory().make(protocolName: .identifier(protocolName), from: extensionDecl)),
+            DeclSyntax(MockedClassDeclFactory().makeProtocol(protocname: .identifier(protocolName), extensionDecl: extensionDecl)),
+            DeclSyntax(MockedClassDeclFactory().makeClass(protocolName: .identifier(protocolName), extensionDecl: extensionDecl)),
         ]
     }
 }
