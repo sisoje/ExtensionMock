@@ -23,16 +23,6 @@ That’s where our PopMock comes into play, with its nested protocols for a clea
 ### Example Code - Original
 
 ```
-struct User {
-    let id: String
-    var name: String
-}
-
-struct Item {
-    let id: String
-    let title: String
-}
-
 class Networking {}
 
 @PopMock
