@@ -1,26 +1,24 @@
-# PopMock macro - needs swift 5.10 toolchain for nested protocols
+# PopMock Macro - Requires Swift 5.10 Toolchain for Nested Protocols
 
-The good old way of writing clean code is:
-- you write a protocol
-- you write implementation
-- you implement a mock for the test
-- when you change a function signature in any of the 3 places you need to update it on other 2 places.
+The traditional approach to writing clean and testable code involves a few repetitive steps:
+- Write a protocol.
+- Implement the protocol.
+- Create a mock based on the protocol for testing.
+- When you change a method signature in one place, you must update the other two accordingly.
 
-Should we really do this all boilerplate by hand and look at it sitting there in the code?
+Does maintaining all this boilerplate by hand and having it clutter up our code sound ideal? What if we could concentrate on the actual implementation and let automation take care of the rest?
 
-What if we focus on the REAL implementation and let the macro do the rest.
-
-Writing super clean code with a macro:
-- you implement a piece of functionality as an extension of your real class
-- macro will generate a nested protocol
-- macro will generate a nested mock class
-- when you change function signature in the only one real implementation you have, then protocol and mock updates automatically.
+With the PopMock macro, you can embrace a cleaner code-writing process:
+- Implement your functionality within an extension of the actual class.
+- The macro automatically generates the relevant nested protocol.
+- The macro creates a nested mock class to accompany it.
+- Now, whenever you alter the method signature in the real implementation, the protocol and mock are updated automatically.
 
 # POP & Mock
 
-Most projects use one protocol conformance per class. This is swift. We can write as many extensions as we want. And we will. SOLID principles at work.
+In many Swift projects, a single class might conform to one protocol. But Swift allows us the flexibility to write as many extensions as we wish—which is precisely what we will do, adhering to SOLID principles.
 
-That is why we do a POP mock with nested protocols.
+That’s where our PopMock comes into play, with its nested protocols for a clean POP mock setup.
 
 ### Example Code - Original
 
@@ -52,7 +50,7 @@ extension Networking: Networking.ItemService {
 }
 ```
 
-### Example Code - Expanded
+### Example Code - Macro Generated
 
 ```
 extension Networking {
@@ -80,10 +78,9 @@ extension Networking {
 }
 ```
 
-### Testing code
+### Example Code - Testing
 
 ```
 let mock = Networking.UserServiceMocked()
 mock.getUserMock.block = { User(id: "1", name: "fake user") }
 ```
-
