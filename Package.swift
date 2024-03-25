@@ -5,17 +5,17 @@ import PackageDescription
 import CompilerPluginSupport
 
 let package = Package(
-    name: "PopMock",
+    name: "ExtensionMock",
     platforms: [.macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6), .macCatalyst(.v13)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "PopMock",
-            targets: ["PopMock"]
+            name: "ExtensionMock",
+            targets: ["ExtensionMock"]
         ),
         .executable(
-            name: "PopMockClient",
-            targets: ["PopMockClient"]
+            name: "ExtensionMockClient",
+            targets: ["ExtensionMockClient"]
         ),
     ],
     dependencies: [
@@ -27,7 +27,7 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         // Macro implementation that performs the source transformation of a macro.
         .macro(
-            name: "PopMockMacros",
+            name: "ExtensionMockMacros",
             dependencies: [
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax")
@@ -35,9 +35,9 @@ let package = Package(
         ),
 
         // Library that exposes a macro as part of its API, which is used in client programs.
-        .target(name: "PopMock", dependencies: ["PopMockMacros"]),
+        .target(name: "ExtensionMock", dependencies: ["ExtensionMockMacros"]),
 
         // A client of the library, which is able to use the macro in its own code.
-        .executableTarget(name: "PopMockClient", dependencies: ["PopMock"]),
+        .executableTarget(name: "ExtensionMockClient", dependencies: ["ExtensionMock"]),
     ]
 )

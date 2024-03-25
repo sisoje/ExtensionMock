@@ -3,7 +3,7 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
-public struct PopMockMacro: MemberMacro {
+public struct ExtensionMockMacro: MemberMacro {
     public static func expansion(of node: AttributeSyntax, providingMembersOf declaration: some DeclGroupSyntax, in context: some MacroExpansionContext) throws -> [DeclSyntax] {
         guard let extensionDecl = declaration.as(ExtensionDeclSyntax.self) else { return [] }
         guard
@@ -17,8 +17,8 @@ public struct PopMockMacro: MemberMacro {
 }
 
 @main
-struct PopMockPlugin: CompilerPlugin {
+struct ExtensionMockPlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
-        PopMockMacro.self,
+        ExtensionMockMacro.self,
     ]
 }

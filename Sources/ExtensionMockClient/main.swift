@@ -1,4 +1,4 @@
-import PopMock
+import ExtensionMock
 
 struct User {
     let id: String
@@ -12,7 +12,7 @@ struct Item {
 
 class Networking {}
 
-@PopMock
+@ExtensionMock
 extension Networking: Networking.UserService {
     var number: Int { 55 }
     func deleteUser(_ id: String) async throws  {}
@@ -21,7 +21,7 @@ extension Networking: Networking.UserService {
     }
 }
 
-@PopMock
+@ExtensionMock
 extension Networking: Networking.ItemService {
     func getItem(_ id: String) async throws -> Item  {
         Item(id: "1", title: "real item")
